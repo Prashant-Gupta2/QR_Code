@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+          <style>
+             body{
+             background-color: black;
+             height: 100vh;    
+             }
+              .container{
+                width: 400px;
+                padding:25px 40px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                background-color: azure;
+                border-radius: 5px;
+              }
+              .container p{
+               font-size: 20px;
+               font-weight: bold;
+               text-align: center;
+               margin-bottom: 12px;
+               font-family: Arial;
+               color: brown;
+              }    
+              .container input{
+               padding: 12px;
+               width: 280px;
+               margin-left: 50px;
+               border-radius: 4px;
+               border: 1px solid black; 
+          }  
+          .container button{
+           background-color: blueviolet;
+           color: white;
+           font-family: Arial;
+           border: none;
+           border-radius: 5px;
+           margin: 20px 0;
+           margin-left: 50px;
+           padding:12px;
+           width: 305px;
+           font-size: 20px;
+           cursor: pointer;
+          }
+          .container img{
+           height: 200px;
+           width: 200px;
+           margin-left: 100px;
+           margin-top: 20px;
+           display: none;
+          }
+          .error{
+           animation: shake;
+           animation-duration: 0.2s;
+           animation-iteration-count: 5;
+          }
+          @keyframes shake {
+           0%{
+             transform: translateX(0);
+           } 
+           25%{
+             transform: translateX(-4px);
+           }   
+           50%{
+             transform: translateX(0);
+           }   
+           100%{
+             transform: translateX(-4px);
+           }           
+          }
+          </style>
+          <script>
+            let imgbox = document.getElementById("imgbox");
+            function generateQR()
+            {
+              if(document.getElementById("inputqr").value.length>0)
+              {
+               document.getElementById("qrimage").style.display="block";     
+              document.getElementById("qrimage").src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+
+              document.getElementById("inputqr").value;     
+              }
+              else{
+               document.getElementById("inputqr").classList.add("error");
+                setTimeout(()=>{
+                    document.getElementById("inputqr").classList.remove("error");
+                },2000)
+              }
+            }
+          </script>
+</head>
+<body>
+     <div class="container">
+       <p>Generate QR Code</p>
+       <input type="text" name="qrcode" id="inputqr" placeholder="Enter Text or URL">
+       <div id="imgbox">
+          <img src="" id="qrimage">
+       </div>
+       <button onclick="generateQR()">Genarate QR</button>
+     </div>     
+</body>
+</html>
